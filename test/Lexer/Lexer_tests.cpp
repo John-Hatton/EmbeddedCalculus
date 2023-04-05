@@ -47,7 +47,11 @@ TEST(LexerTests, LexerTests_LexerTests__Test03) {
             Token(TokenType::CONSTANT, "0.5"),
             Token(TokenType::END_OF_FILE, "")
     };
-    EXPECT_EQ(expected_tokens, lexer.getTokens());
+
+    std::vector<Token> actual_tokens = lexer.getTokens();
+    Token firstToken = lexer.getTokens()[0];
+    EXPECT_EQ(expected_tokens, actual_tokens);
+    EXPECT_EQ(firstToken.getType(), TokenType::CONSTANT);
 }
 
 
