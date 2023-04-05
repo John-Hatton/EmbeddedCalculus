@@ -5,6 +5,7 @@
 #define EMBEDEDCALCULUS_NODEFACTORY_H
 
 #include "ASTNode/ASTNode.h"
+#include <Lexer/Token.h>
 #include <memory>
 #include <map>
 #include <functional>
@@ -24,7 +25,7 @@ public:
      * @return Returns a unique_ptr to the new ASTNode.
      */
     template<typename T>
-    std::unique_ptr<T> createNode(std::unique_ptr<ASTNode*> left, std::unique_ptr<ASTNode*> right) {
+    std::unique_ptr<T> createNode(std::unique_ptr<ASTNode> left, std::unique_ptr<ASTNode> right) {
         return std::make_unique<T>(std::move(left), std::move(right));
     }
 
@@ -47,10 +48,10 @@ public:
      * @param right The right child of the new ASTNode.
      * @return Returns a unique_ptr to the new ASTNode.
      */
-    std::unique_ptr<ASTNode*> createNode(ASTNode::NodeType type, std::unique_ptr<ASTNode*> left, std::unique_ptr<ASTNode*> right);
+    std::unique_ptr<ASTNode> createNode(TokenType type, std::unique_ptr<ASTNode> left, std::unique_ptr<ASTNode> right);
 
 private:
-    std::map<ASTNode::NodeType, std::function<std::unique_ptr<ASTNode*>(std::unique_ptr<ASTNode*>, std::unique_ptr<ASTNode*>)>> nodeTypes;
+    std::map<TokenType, std::function<std::unique_ptr<ASTNode>(std::unique_ptr<ASTNode>, std::unique_ptr<ASTNode>)>> nodeTypes;
 };
 
 #endif //EMBEDEDCALCULUS_NODEFACTORY_H

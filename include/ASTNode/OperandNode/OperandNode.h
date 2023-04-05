@@ -19,7 +19,7 @@ public:
      * Getter Function: Returns the value of this OperandNode.
      * @return The value of this OperandNode.
      */
-    const T& getValue() const;
+    virtual const T& getValue() const;
 
 protected:
     /**
